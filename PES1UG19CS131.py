@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import random
 
-print("lol")
+print("lo0l")
 
 
 def get_entropy_of_attribute(df, attribute):
