@@ -1,18 +1,57 @@
-#!/usr/bin/env python3
-import sys, json,requests
-lat=float(sys.argv[1])
-lng=float(sys.argv[2])
-d=float(sys.argv[3])
-a=0
-b=0
-for line in sys.stdin:
-    line=line.strip()
-    res=json.loads(line)
-    start_lat=float(res['Start_Lat'])
-    start_lng=float(res['Start_Lng'])
-    ed=((start_lat-lat)*2 + (start_lng-lng)2)*0.5
-    if(float(ed)<d):
-        payload={"latitude":start_lat,"longitude":start_lng}
-        re=requests.post(url="http://20.185.44.219:5000/",json=payload)
-        ev=re.json()
-        print(ev['city'],ev['state'],1)
+ 
+ #If any of the required attributes contain NaN, ignore the record
+ #!/usr/bin/env python3
+
+import json
+import sys
+import requests
+from datetime import datetime
+
+
+
+LATI=float(sys.argv[1]) 
+LONGI=float(sys.argv[2])
+RASTA=float(sys.argv[3])
+
+for l in sys.stdin:
+    
+    res=json.loads(l.strip())
+    start_lat=(res['Start_Lat'])
+    
+    
+    start_lng=(res['Start_Lng'])
+    
+    start_lng=float(start_lng)
+    start_lat=float(start_lat)
+    
+    
+    
+    if start_lng=='NaN' and start_lat=='NaN':
+    
+       #apna kaam krna 
+      continue
+    d_NEW=((start_lat-LATI)**2 + (start_lng-LONGI)**2)**0.5
+    if(float(d_NEW)<RASTA):
+    
+    
+    
+    
+        data={"latitude":start_lat,"longitude":start_lng}
+        
+        
+        
+        readed=requests.post(url="http://20.185.44.219:5000/",json=data)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        readed_new=readed.json()
+        
+        print(readed_new['city'],readed_new['state'],1)
