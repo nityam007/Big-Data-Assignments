@@ -21,8 +21,17 @@ for line in sys.stdin:
 			print(current_city,current_count)
 			current_city=city
 			current_count=count
-	else:
+	elif current_state == None:
 		print(state)
 		current_state=state
 		current_city=city
 		current_count=count
+	else:
+		print(current_state,current_count)
+		print(state)
+		current_state=state
+		current_city=city
+		current_count=count
+
+print(current_city,current_count)
+print(current_state,current_count)
