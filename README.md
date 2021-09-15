@@ -14,11 +14,11 @@ Hadoop can be started using the following command.<br/>
 
 You can view all the Java processes running on your system using jps.</br>
 After running jps you should see the following processes running (in any order) along with their process IDs:</br>
- ``` DataNode
-  SecondaryNameNode
-  Jps
-  ResourceManager
-  NameNode
-  NodeManager  ```
-  
----
+ ``` DataNode ```
+ ``` SecondaryNameNode```
+ ``` ps```
+ ```ResourceManager```
+ ```NameNode```
+  ```NodeManager ```
+ --- 
+
