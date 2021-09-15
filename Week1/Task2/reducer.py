@@ -3,33 +3,26 @@
 import sys
 import simplejson as json
  
-out = {}
+current_state = None
+current_city = None
+current_count = 0
 for line in sys.stdin:
-	line = line.strip()
-	print(line)
-	vals = line.split()
-	print(vals)
-	
-	n = len(val)
-	
-	if(n==4):
+	# line = line.strip()
+	# print(line)
+	state, city, temp_count = line.split('$')
+	count = int(temp_count)
+	# print(state, city, count)
+
+	if current_state == state:
+		if current_city == city:
+			current_count +=count
 		
-		val[0]=val[0]+" "+val[1]
-		val.pop(val[1])
-		
-		if(val[1] not in out):
-			  
-		
-		
-	
+		else :
+			print(current_city,current_count)
+			current_city=city
+			current_count=count
 	else:
-		p=""
-		
-		
-	for i in vals:
-		if(i==str and i not in out):
-			out[i]=1
-    
-		else:
-        		out[i]=out[i]+1
-			
+		print(state)
+		current_state=state
+		current_city=city
+		current_count=count

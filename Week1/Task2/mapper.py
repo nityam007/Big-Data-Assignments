@@ -54,4 +54,5 @@ for l in sys.stdin:
         
         readed_new=readed.json()
         
-        print(readed_new['city'],readed_new['state'],1)
+        # print(readed_new['city'],readed_new['state'],1)
+        print("{}${}${}".format(readed_new['state'],readed_new['city'],1))
