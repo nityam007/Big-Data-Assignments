@@ -19,6 +19,6 @@ After running jps you should see the following processes running (in any order) 
   Jps
   ResourceManager
   NameNode
-  NodeManager```
+  NodeManager  ```
   
 ---
