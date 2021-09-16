@@ -1,6 +1,6 @@
- 
- #If any of the required attributes contain NaN, ignore the record
- #!/usr/bin/env python3
+#!/usr/bin/env python3
+
+#If any of the required attributes contain NaN, ignore the record
 
 import json
 import sys
