@@ -26,7 +26,7 @@ for l in sys.stdin:
     start_lat=float(start_lat)
     
     
-    if math.isnan(start_lng) and math.isnan(start_lat):
+    if math.isnan(start_lng) or math.isnan(start_lat):
     
        #apna kaam krna 
       continue
