@@ -5,6 +5,7 @@
 import json
 import sys
 import requests
+import math
 from datetime import datetime
 
 
@@ -25,32 +26,18 @@ for l in sys.stdin:
     start_lat=float(start_lat)
     
     
-    
-    if start_lng=='NaN' and start_lat=='NaN':
+    if math.isnan(start_lng) and math.isnan(start_lat):
     
        #apna kaam krna 
       continue
     d_NEW=((start_lat-LATI)**2 + (start_lng-LONGI)**2)**0.5
     if(float(d_NEW)<RASTA):
     
-    
-    
-    
         data={"latitude":start_lat,"longitude":start_lng}
         
         
         
         readed=requests.post(url="http://20.185.44.219:5000/",json=data)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         readed_new=readed.json()
         
