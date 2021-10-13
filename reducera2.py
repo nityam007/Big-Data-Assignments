@@ -20,7 +20,7 @@ fptr = open(r"v.txt","w")
 
 for k in to_hold:
 	fptr.write(str(k))
-	fptr.write(" ")
+	fptr.write(",")
 	fptr.write("1")
 	fptr.write("\n")
 
