@@ -16,6 +16,13 @@ for line in sys.stdin:
 	else:
 		to_hold[holder[0]]=[holder[1]]
 	
+fptr = open(r"v.txt","w")
+
+for k in to_hold:
+	fptr.write(str(k))
+	fptr.write(" ")
+	fptr.write("1")
+	fptr.write("\n")
 
 for i in to_hold:
 	print(i,"\t", to_hold[i]) # Printing with \t as the delimiter (as the same was used in the assignment description as well)
