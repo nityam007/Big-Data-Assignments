@@ -17,7 +17,7 @@ v_file = open(v_filepath, 'r')
 
 embedding_data=json.loads(emb_file.read()) #This will read it as dictionary
 
-s_dict={}    # Adj List as  dictionary
+
 for line in sys.stdin: #Reading from Adjacency List given as input
     data=line.strip()
     a=data.split('\t') #Splitting Adjacency List by Key : Value
