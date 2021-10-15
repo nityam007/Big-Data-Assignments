@@ -46,4 +46,20 @@ for line in sys.stdin: #Reading from Adjacency List given as input
 	 # Cosine similarity
      cos_sim = dot / (mod_a*mod_b)
      temp_comp=(cos_sim /len(lengths))#multiplying with outgoing probablities (Transition Matrix Values)
-     print(a[0]," ",temp_comp) 
+     #(Key - Node pointing to -Contribution value)
+     print(i," ",a[0]," ",temp_comp) #string int float output with one space separation 
+    
+    
+   
+   
+    	
+  
+ 
+ 
+ 
+ 
+ 
+ 	
+	
+   
+  
