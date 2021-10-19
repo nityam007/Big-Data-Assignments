@@ -9,6 +9,9 @@ temp=None
 source_node_checker=0
 
 holding_list=[]
+
+fptr = open(r"v.txt","w")
+
 for line in sys.stdin:
 	line = line.strip() # Removing white spaces after every line
 	holder = line.split() # Striping lines based on white space
@@ -19,7 +22,11 @@ for line in sys.stdin:
 	if(temp==None):
 		temp=holder[0]
 		holding_list.append(holder[1])
-	
+		fptr.write(str(temp))
+		fptr.write(",")
+		fptr.write("1")
+		fptr.write("\n")
+		
 	elif(temp==source_node_checker):
 		holding_list.append(holder[1])
 		
@@ -27,18 +34,16 @@ for line in sys.stdin:
 		print(temp,"\t", holding_list)
 		holding_list=[]
 		holding_list.append(holder[1])
+		fptr.write(str(source_node_checker))
+		fptr.write(",")
+		fptr.write("1")
+		fptr.write("\n")
 	
 	
 	temp=source_node_checker
 	
-print(temp,"\t",holding_list)	
 	
-fptr = open(r"v.txt","w")
-
-for k in to_hold:
-	fptr.write(str(k))
-	fptr.write(",")
-	fptr.write("1")
-	fptr.write("\n")
+print(temp,"\t",holding_list)	
 
 fptr.close()
+
