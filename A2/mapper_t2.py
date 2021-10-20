@@ -3,8 +3,8 @@
 import sys
 import json
 
-v_filepath = sys.argv[2]
-emb_filepath = sys.argv[1]
+v_filepath = sys.argv[1]
+emb_filepath = sys.argv[2]
 
 # print
 emb_file = open(emb_filepath, 'r') ###Page Embedding file
@@ -46,8 +46,8 @@ for line in sys.stdin: #Reading from Adjacency List given as input
 	 # Cosine similarity
      cos_sim = dot / (mod_a*mod_b)
      temp_comp=(cos_sim /len(lengths))#multiplying with outgoing probablities (Transition Matrix Values)
-     #(Key - Node pointing to -Contribution value)
-     print(i," ",a[0]," ",temp_comp) #string int float output with one space separation 
+     #(node key being pointed - Nodes which point to key -Contribution value)
+     print(i," ",a[0]," ",temp_comp) # int string float output with one space separation 
     
     
    
@@ -63,3 +63,4 @@ for line in sys.stdin: #Reading from Adjacency List given as input
 	
    
   
+

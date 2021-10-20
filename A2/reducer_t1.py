@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import os
 
 
 to_hold={}  #A dictionary to hold the node and the list of nodes it point to.
@@ -9,8 +10,8 @@ temp=None
 source_node_checker=0
 
 holding_list=[]
-
-fptr = open(r"v.txt","w")
+path= os.getcwd()+"v"
+fptr = open(path,"w")
 
 for line in sys.stdin:
 	line = line.strip() # Removing white spaces after every line
