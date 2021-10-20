@@ -2,9 +2,7 @@
 
 import sys
 import os
-
-
-to_hold={}  #A dictionary to hold the node and the list of nodes it point to.
+ 
 
 temp=None 
 source_node_checker=0
@@ -32,7 +30,9 @@ for line in sys.stdin:
 		holding_list.append(holder[1])
 		
 	elif(temp!=source_node_checker):
-		print(temp,"\t", holding_list)
+		print("%s\t" %temp, end="")
+		print(holding_list)
+		
 		holding_list=[]
 		holding_list.append(holder[1])
 		fptr.write(str(source_node_checker))
@@ -44,7 +44,7 @@ for line in sys.stdin:
 	temp=source_node_checker
 	
 	
-print(temp,"\t",holding_list)	
+print("%s\t" %temp, end="")
+print(holding_list)	
 
 fptr.close()
-
