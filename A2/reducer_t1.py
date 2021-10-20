@@ -8,7 +8,8 @@ temp=None
 source_node_checker=0
 
 holding_list=[]
-path= os.getcwd()+"/v"
+# path= os.getcwd()+"/v"
+path="/home/pes_bigdata/Desktop/Assignment-2/v"
 fptr = open(path,"w")
 
 for line in sys.stdin:
