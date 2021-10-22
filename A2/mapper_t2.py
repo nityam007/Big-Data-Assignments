@@ -10,8 +10,15 @@ emb_filepath = sys.argv[2]
 emb_file = open(emb_filepath, 'r') ###Page Embedding file
 v_file = open(v_filepath, 'r') 
 
+pgr={}
 
+line_read_curr=v_file.read().strip().split("\n")
 
+for x in line_read_curr:
+	page,rank=x.split(',')
+	
+	pgr[page.strip()]=float(rank.strip())
+	
 #### S embedding matrix #####
 ### Similarity calculation is just dot product between two word embeddings
 
@@ -26,7 +33,9 @@ for line in sys.stdin: #Reading from Adjacency List given as input
     to_strip=a[1].strip('][ ').split(', ') #a[1] is list of values
     to_strip=list(to_strip)
     lengths=list(map(int,to_strip)) #lengths contains all the nodes  key pointing to
-   
+    
+    print(key," ",None," ",0)
+    
     for i in lengths: #iterate through every value where key is pointing to calculate similarity between them
          
  	 
@@ -45,22 +54,6 @@ for line in sys.stdin: #Reading from Adjacency List given as input
 
 	 # Cosine similarity
      cos_sim = dot / (mod_a*mod_b)
-     temp_comp=(cos_sim /len(lengths))#multiplying with outgoing probablities (Transition Matrix Values)
+     temp_comp=( (cos_sim * pgr[key]) /len(lengths))#multiplying with outgoing probablities (Transition Matrix Values)
      #(node key being pointed - Nodes which point to key -Contribution value)
      print(i," ",a[0]," ",temp_comp) # int string float output with one space separation 
-    
-    
-   
-   
-    	
-  
- 
- 
- 
- 
- 
- 	
-	
-   
-  
-
