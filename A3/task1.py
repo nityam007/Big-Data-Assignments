@@ -1,93 +1,39 @@
-import csv
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 import sys
+from functools import reduce
+from pyspark.sql.types import *
 
 country=sys.argv[1]
-#print(sys.argv[0])
-path='/Users/Darshilshah/Downloads/city_sample_5percent.csv'
-city_gtt_avgtemp=dict()
-city_avgtemp=dict()
-file=open(path,"r")
-data=file.read()
-i=0
-with open(path) as csv_file:
+path=sys.argv[2]
 
-    csv_reader=csv.reader(csv_file)
-
-    for line in csv_reader:
-        if(line[4]==country):
-            
-            if(line[3] in city_avgtemp):
-                try:
-                    city_avgtemp[line[3]]+=float(line[1])
-                except:
-                    i+=1          
-            
-            else:
-                try:
-                    city_avgtemp[line[3]]=float(line[1])
-                except:
-                    i+=1
-                
-    for x in city_avgtemp:
-         occurences=data.count(x)
-         city_avgtemp[x]=city_avgtemp[x]/occurences
-            
+spark = SparkSession.builder.appName('A3T2').getOrCreate()
 
 
-with open(path) as csv_file2:
-    csv_reader=csv.reader(csv_file2)
-    for line2 in csv_reader:
-        if(line2[4]==country): 
-            try:
-                if((float(line2[1])>city_avgtemp[line2[3]])):
-                    city_gtt_avgtemp[line2[3]]+=1
-                    
-                else:
-                    city_gtt_avgtemp[line2[3]]=1
-            except:
-                i+=1          
-            
 
-    print(city_gtt_avgtemp)
- 
-'''from pyspark.sql import SparkSession
-import sys
+df=spark.read.option("header","true").csv(path)
 
-spark = SparkSession.builder.appName('A3T1').getOrCreate()
+df_only_country=df.where(df.Country==country)
 
-hold = spark.read.csv("C:/Users/Nityam/Dropbox (Old)/My PC (DESKTOP-P3UAN3I)/Downloads/city_sample.csv", sep=',',inferSchema=True, header=True)
-df = hold.toPandas()
+df2= df_only_country.withColumn("AverageTemperature",col("AverageTemperature").cast(FloatType()))
 
-cities=[]
-for i in df.iloc():
-    if(i['Country']=='Germany'):
-        if(i['City'] not in cities):
-            cities.append(i['City'])
-            
-cities.sort() #Sorting all the cities corresponding to a country in lexiographical order
-#print(cities)
+df3=df2.groupBy("City").mean("AverageTemperature")
 
-avg_temp={} #Stores the City and its average temperature as key-value pairs
+oldColumns = df3.schema.names
 
-for i in cities:
-    sum_val=0
-    count=0
-    for j in df.iloc:
-        if (j['City']==i):
-            sum_val=sum_val+j['AverageTemperature']
-            count+=1
-    
-    avg_temp[i]=(sum_val/count)
+newColumns=["ew","cityavgtemp"]
 
-for k in avg_temp:
-    count=0
-    for p in df.iloc():
-        if p['City']==k:
-            if(p['AverageTemperature']>avg_temp[k]):
-                count+=1
-    
-    if(count>=1):
-        print(k,end="")
-        print("\t",end="")
-        print(count)  
- '''
+temp= reduce(lambda df3, idx: df3.withColumnRenamed(oldColumns[idx], newColumns[idx]), range(len(oldColumns)), df3)
+
+joined_df=df2.join(temp,df2.City==temp.ew)
+
+final_res=joined_df.filter(joined_df.AverageTemperature>joined_df.cityavgtemp).groupBy("City").count()
+
+final_res=final_res.orderBy(['City'])
+
+rdd_final_vals=final_res.collect()
+
+for i in rdd_final_vals:
+    print(i['City'],end="")
+    print("\t",end="")
+    print(i['count'])
